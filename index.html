@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load the Paper.js library -->
+<script type="text/javascript" src="js/paper.js"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/paperscript" canvas="myCanvas">
+  var mystic, md, turns, strokeRatio, xstep, ystep;  
+  mystic = 6;
+  turns = 9;  
+  md = mystic * mystic;
+  xstep = [1,0,-1,0];
+  ystep = [0,1,0,-1];
+  strokeRatio = md / mystic;
+
+  var rect = new Shape.Rectangle();
+  rect.fillColor = 'black';
+
+  var path, start, last, curr, scalestep;
+  path = new Path();
+  path.strokeColor = 'white';
+  path.strokeWidth = strokeRatio;
+  path.strokeCap = 'square';
+  path.moveTo(curr);
+
+  curr = new Point(0,0);  
+  last = new Point();  
+
+  for (var i=0; i < turns; i++) {
+    scalestep = Math.round((i+1)/2) * md;
+    curr = last + [ scalestep*xstep[i%4], scalestep*ystep[i%4] ];
+    if (i+1 === turns) {       
+      curr = [ curr.x - md*xstep[i%4], curr.y - md*ystep[i%4] ];
+    }
+    path.lineTo(curr);
+    last = curr;
+  }
+  
+  rect.size = path.handleBounds.size + 2 * md;
+
+  function onResize(event) {
+    rect.position = view.center;
+    path.position = view.center;
+  }
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize="true"></canvas>
+</body>
+</html>
