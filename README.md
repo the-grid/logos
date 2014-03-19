@@ -1,4 +1,18 @@
-logos
-=====
+# The Grid Logos
 
-In the algorithm was the Logos
+> in the algorithm was the logos - D4
+
+
+## Usage
+
+
+
+## API
+    
+  line:
+    weight: 1
+    
+    turns:    
+  plane:
+    ratio: 1
+  
